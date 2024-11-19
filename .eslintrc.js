@@ -3,9 +3,6 @@ module.exports = {
     'browser': true,
     'es6': true,
     'jest/globals': true,
-    'globals': {
-      ...globals.node
-    }
   },
   'extends': [
     'eslint:recommended',
