@@ -34,7 +34,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - uses: superfly/flyctl-actions/setup-flyctl@main
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
         run: flyctl deploy --remote-only
         env:
