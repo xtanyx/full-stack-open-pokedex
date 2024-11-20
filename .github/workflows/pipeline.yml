@@ -25,13 +25,13 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: build
-        run: npm run build
+        run: npm run buil
       - name: Build failure
         uses: sebastianpopp/discord-action@releases/v2
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: Build failed.         
+          message: Build failed. Commit https://github.com/xtanyx/full-stack-open-pokedex/commit/${{ github.sha }} broke the build       
       - name: test
         run: npm test
       - name: Install dependencies
