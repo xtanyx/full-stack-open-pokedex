@@ -31,7 +31,7 @@ jobs:
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: Build failed.         
+          message: Build failed. Commit https://github.com/xtanyx/full-stack-open-pokedex/commit/${{ github.sha }} broke the build       
       - name: test
         run: npm test
       - name: Install dependencies
