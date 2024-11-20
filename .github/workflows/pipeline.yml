@@ -27,11 +27,11 @@ jobs:
       - name: build
         run: npm run buil
       - name: Build failure
-        uses: th0th/notify-discord@v0.4.1
+        uses: sebastianpopp/discord-action@releases/v2
         if: ${{ failure() }}
-        env:
-            GITHUB_JOB_NAME: "Build failed"
-            DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}           
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: Build failed.         
       - name: test
         run: npm test
       - name: Install dependencies
