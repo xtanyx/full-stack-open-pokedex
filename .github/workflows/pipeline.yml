@@ -26,6 +26,12 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: Build failure
+        uses: sebastianpopp/discord-action@releases/v2
+        if: ${{ failure() }}
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: Build failed.         
       - name: test
         run: npm test
       - name: Install dependencies
@@ -45,7 +51,13 @@ jobs:
         run: flyctl deploy --remote-only
         if: ${{ github.event_name == 'push' && env.CONTAINS != 'true' }}
         env:
-          FLY_API_TOKEN: ${{ secrets. FLY_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Deploy success
+        uses: sebastianpopp/discord-action@releases/v2
+        if: ${{ github.event_name == 'push' && env.CONTAINS != 'true' && success() }}
+        with:
+          message: A new version of pokedex deployed!
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
